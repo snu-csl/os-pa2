@@ -120,8 +120,9 @@ __RETURN VALUE__
 
 ## Restrictions
 
-* We found that the `rdtime` instruction is not supported in old versions of `qemu`. For this project assignment, you should use the `qemu` version 6.2.0 or later. To determine the `qemu` version, use the command: `$ qemu-system-riscv64 --version`
+* We found that the `rdtime` instruction is not supported or does not behave correctly in older versions of `qemu`. For this project assignment, you should use the `qemu` version 8.2.0 or higher. To determine the `qemu` version, use the command: `$ qemu-system-riscv64 --version`
 * We will run `qemu-system-riscv64` with the `-icount shift=0` option, which enables aligning the host and virtual clocks. This setting is already included in the `Makefile` for the `pa2` branch.
+* You should not modify the `mcounteren` register. 
 * You can assume a uniprocessor RISC-V system (`CPUS` = 1) for this project assignment. 
 * You only need to change the files in the `./kernel` directory. Any other changes will be ignored during grading.
 
