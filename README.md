@@ -107,7 +107,6 @@ __DESCRIPTION__
 
 The `nenter()` system call returns the total count of `[ENTER]` key presses from the console input device (i.e., keyboard) since the system booted.
 
-
 __RETURN VALUE__
 
 * `nenter()` returns the cumulative count of `[ENTER]` key presses from the keyboard. This count is initialized to zero at kernel startup and is expected to increase monotonically thereafter.
@@ -130,6 +129,10 @@ The `getpmpaddr()` system call returns the 64-bit physical address stored in the
 ```
 The PMP address registers contain only bits 55-2 of the physical address, so after reading the value using the `csrr` instruction, you need to shift the result left by 2 bits to obtain the full address. The remaining bits 63-56 are set to zero. Since PMP address registers are only accessible in machine mode, another (nested) system call from supervisor mode to machine mode is required to retrieve their values. 
 
+__RETURN VALUE__
+
+* `getpmpaddr()` returns a 64-bit physical address, where bits 55-2 are obtained from the `n`-th PMP address register (e.g., `pmpaddr0`, `pmpaddr1`, etc.), and the remaining bits are set to zero.
+* If `n` is less than 0 or greater than 3, `getpmpaddr()` returns `(void *) -1`. 
 
 ### 3. Implement the `getpmpcfg()` system call (20 points)
 
@@ -142,7 +145,7 @@ __SYNOPSYS__
 
 __DESCRIPTION__
 
-The `getpmpcfg()` system call returns an integer where the lower 8 bits represent the content of the specified PMP configuration register. The value `n` denotes the index of the PMP configuration register (e.g., 0 for `pmp0cfg`, 1 for `pmp1cfg`, etc.). You can assume that `n` is an integer value between 0 and 3. Since individual 8-bit PMP configuration registers, such as `pmp0cfg` and `pmp1cfg`, cannot be read directly, you must read the entire 64-bit `pmpcfg0` register,  which contains `pmp0cfg` through `pmp7cfg`, and then extract the corresponding 8-bit entry. The 64-bit PMP configuration registers can be accessed using the following RISC-V assembly instruction.
+The `getpmpcfg()` system call returns an integer, where the lower 8 bits represent the content of the specified PMP configuration register. The value `n` denotes the index of the PMP configuration register (e.g., 0 for `pmp0cfg`, 1 for `pmp1cfg`, etc.). You can assume that `n` is an integer value between 0 and 3. Since individual 8-bit PMP configuration registers, such as `pmp0cfg` and `pmp1cfg`, cannot be read directly, you must read the entire 64-bit `pmpcfg0` register,  which contains `pmp0cfg` through `pmp7cfg`, and then extract the corresponding 8-bit entry. The 64-bit PMP configuration registers can be accessed using the following RISC-V assembly instruction.
 
 ```
   # Reading pmpcfg0 register
@@ -151,6 +154,10 @@ The `getpmpcfg()` system call returns an integer where the lower 8 bits represen
 
 Similar to PMP address registers, PMP configuration registers are only accessible in machine mode. Therefore, you must make another (nested) system call from supervisor mode to machine mode to retrieve their values. 
 
+__RETURN VALUE__
+
+* `getpmpcfg()` returns a 32-bit integer, where lower 8 bits (bits 7-0) are obtained from the `n`-th PMP configuration register (e.g., `pmp0cfg`, `pmp1cfg`, etc.), and the remaining bits are set to zero. 
+* If `n` is less than 0 or greater than 3, `getpmpcfg()` returns `-1`. 
 
 ## Restrictions
 
