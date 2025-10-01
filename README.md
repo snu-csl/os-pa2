@@ -305,7 +305,7 @@ $
 
 ## Hand in instructions
 
-* First, make sure you are on the `pa2` branch in your `xv6-riscv-snu` directory. And then perform the `make submit` command to generate a compressed tar file named `xv6-{PANUM}-{STUDENTID}.tar.gz` in the `../xv6-riscv-snu` directory. Upload this file to the submission server. You don't need to upload any documents for this project assignment.
+* First, make sure you are on the `pa2` branch in your `xv6-riscv-snu` directory. And then perform the `make submit` command to generate a compressed tar file named `xv6-{PANUM}-{STUDENTID}.tar.gz` in the `../xv6-riscv-snu` directory. Upload this file to the submission server. In addition, you must also upload your design document as a PDF file for this project assignment.
 
 * The total number of submissions for this project assignment will be limited to 30. Only the version marked as `FINAL` will be considered for the project score. Please remember to designate the version you wish to submit using the `FINAL` button. 
   
