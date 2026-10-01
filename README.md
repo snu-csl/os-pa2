@@ -99,7 +99,7 @@ start()
 
 First, you need to implement the `nenter()` system call. The system call number of `nenter()` is already assigned to 23 in the `./kernel/syscall.h` file. 
 
-__SYNOPSYS__
+__SYNOPSIS__
 ```
     int nenter();
 ```
@@ -116,7 +116,7 @@ __RETURN VALUE__
 
 You are required to implement the `getpmpaddr()` system call. The system call number of `getpmpaddr()` is already assigned to 24 in the `./kernel/syscall.h` file.
 
-__SYNOPSYS__
+__SYNOPSIS__
 ```
     void *getpmpaddr(int n);
 ```
@@ -139,7 +139,7 @@ __RETURN VALUE__
 
 Finally, you need to implement the `getpmpcfg()` system call. The system call number of `getpmpcfg()` is already assigned to 25 in the `./kernel/syscall.h` file.
 
-__SYNOPSYS__
+__SYNOPSIS__
 ```
     int getpmpcfg(int n);
 ```
